@@ -47,8 +47,24 @@ config IOSCHED_ZEN
 	tristate "Zen I/O scheduler"
 	default y
 	---help---
+<<<<<<< HEAD
 	FCFS, dispatches are back-inserted, deadlines ensure fairness.
         Should work best with devices where there is no travel delay.
+
+config IOSCHED_TRIPNDROID
+	tristate "TripNDroid IO Scheduler"
+=======
+	  The BFQ I/O scheduler tries to distribute bandwidth among
+	  all processes according to their weights.
+	  It aims at distributing the bandwidth as desired, independently of
+	  the disk parameters and with any workload. It also tries to
+	  guarantee low latency to interactive and soft real-time
+	  applications. If compiled built-in (saying Y here), BFQ can
+	  be configured to support hierarchical scheduling.
+
+config BFQ_GROUP_IOSCHED
+	bool "BFQ hierarchical scheduling support"
+	depends on IOSCHED_BFQ && BLK_CGROUP
 
 config IOSCHED_TRIPNDROID
 	tristate "TripNDroid IO Scheduler"
