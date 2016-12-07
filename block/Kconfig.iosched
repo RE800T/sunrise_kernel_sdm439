@@ -58,6 +58,7 @@ config IOSCHED_BFQ
 	processes according to their weights, regardless of the
 	device parameters and with any workload. It also guarantees
 	a low latency to interactive and soft real-time applications.
+	Details in Documentation/block/bfq-iosched.txt
 
 config BFQ_GROUP_IOSCHED
 	bool "BFQ hierarchical scheduling support"
@@ -80,6 +81,9 @@ config IOSCHED_SIO
 	  ensure fairness. The algorithm does not do any sorting but
 	  basic merging, trying to keep a minimum overhead. It is aimed
 	  mainly for aleatory access devices (eg: flash devices).
+
+	Enable hierarchical scheduling in BFQ, using the blkio
+	(cgroups-v1) or io (cgroups-v2) controller.
 
 choice
 	prompt "Default I/O scheduler"
