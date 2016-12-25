@@ -879,17 +879,7 @@ static inline int wait_on_page_bit_common(wait_queue_head_t *q,
 {
 	struct wait_page_queue wait_page;
 	wait_queue_t *wait = &wait_page.wait;
-	bool thrashing = false;
-	unsigned long pflags;
 	int ret = 0;
-
-	if (bit_nr == PG_locked &&
-	    !PageUptodate(page) && PageWorkingset(page)) {
-		if (!PageSwapBacked(page))
-			delayacct_thrashing_start();
-		psi_memstall_enter(&pflags);
-		thrashing = true;
-	}
 
 	init_wait(wait);
 	wait->func = wake_page_function;
@@ -913,6 +903,10 @@ static inline int wait_on_page_bit_common(wait_queue_head_t *q,
 
 		if (likely(test_bit(bit_nr, &page->flags))) {
 			io_schedule();
+			if (unlikely(signal_pending_state(state, current))) {
+				ret = -EINTR;
+				break;
+			}
 		}
 
 		if (lock) {
@@ -922,20 +916,9 @@ static inline int wait_on_page_bit_common(wait_queue_head_t *q,
 			if (!test_bit(bit_nr, &page->flags))
 				break;
 		}
-
-		if (unlikely(signal_pending_state(state, current))) {
-			ret = -EINTR;
-			break;
-		}
 	}
 
 	finish_wait(q, wait);
-
-	if (thrashing) {
-		if (!PageSwapBacked(page))
-			delayacct_thrashing_end();
-		psi_memstall_leave(&pflags);
-	}
 
 	/*
 	 * A signal could leave PageWaiters set. Clearing it here if
