@@ -747,15 +747,10 @@ err_out:
 static void kernfs_release_file(struct kernfs_node *kn,
 				struct kernfs_open_file *of)
 {
-	/*
-	 * @of is guaranteed to have no other file operations in flight and
-	 * we just want to synchronize release and drain paths.
-	 * @kernfs_open_file_mutex is enough.  @of->mutex can't be used
-	 * here because drain path may be called from places which can
-	 * cause circular dependency.
-	 */
-	lockdep_assert_held(&kernfs_open_file_mutex);
+	if (!(kn->flags & KERNFS_HAS_RELEASE))
+		return;
 
+	mutex_lock(&of->mutex);
 	if (!of->released) {
 		/*
 		 * A file is never detached without being released and we
@@ -765,6 +760,7 @@ static void kernfs_release_file(struct kernfs_node *kn,
 		kn->attr.ops->release(of);
 		of->released = true;
 	}
+	mutex_unlock(&of->mutex);
 }
 
 static int kernfs_fop_release(struct inode *inode, struct file *filp)
