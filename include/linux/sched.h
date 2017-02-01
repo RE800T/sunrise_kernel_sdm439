@@ -237,8 +237,6 @@ static inline int sched_set_wake_up_idle(struct task_struct *p,
 }
 #endif
 
-extern void calc_global_load(unsigned long ticks);
-
 #if defined(CONFIG_SMP) && defined(CONFIG_NO_HZ_COMMON)
 extern void cpu_load_update_nohz_start(void);
 extern void cpu_load_update_nohz_stop(void);
