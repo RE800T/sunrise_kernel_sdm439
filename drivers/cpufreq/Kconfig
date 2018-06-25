@@ -305,7 +305,10 @@ config CPU_FREQ_GOV_SCHEDUTIL
 	  If in doubt, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 8120b823ccfb... cpufreq: blu_schedutil: Introduce initial bringup
 config CPU_FREQ_GOV_BLU_SCHEDUTIL
 	tristate "'blu_schedutil' cpufreq policy governor"
 	depends on CPU_FREQ
@@ -326,6 +329,7 @@ config CPU_FREQ_GOV_BLU_SCHEDUTIL
 
 	  If in doubt, say N.
 
+<<<<<<< HEAD
 config CPU_FREQ_GOV_PIXUTIL
 	tristate "'pixutil' cpufreq policy governor"
 	depends on CPU_FREQ
@@ -404,6 +408,9 @@ config CPU_FREQ_GOV_DARKNESSSCHED
 
 =======
 >>>>>>> 78112d663b4c... sched: Add Energy DCFC Governor
+=======
+
+>>>>>>> 8120b823ccfb... cpufreq: blu_schedutil: Introduce initial bringup
 config CPU_INPUT_BOOST
 	bool "CPU Input Boost"
 	help
@@ -473,7 +480,10 @@ config MAX_BOOST_FREQ_PERF
 	  Max-boost frequency for the performance CPU cluster.
 endif
 
+<<<<<<< HEAD
 >>>>>>> 03ed6ce5dac4... cpufreq_darknesssched: Created a new sched governor.
+=======
+>>>>>>> 8120b823ccfb... cpufreq: blu_schedutil: Introduce initial bringup
 comment "CPU frequency scaling drivers"
 
 config CPUFREQ_DT
