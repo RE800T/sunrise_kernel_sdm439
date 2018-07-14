@@ -33,9 +33,6 @@ struct sugov_tunables {
 	struct gov_attr_set attr_set;
 	unsigned int up_rate_limit_us;
 	unsigned int down_rate_limit_us;
-	unsigned int hispeed_load;
-	unsigned int hispeed_freq;
-	bool pl;
 	bool iowait_boost_enable;
 };
 
@@ -609,10 +606,8 @@ static ssize_t down_rate_limit_us_store(struct gov_attr_set *attr_set,
 	return count;
 }
 
-<<<<<<< HEAD
 static struct governor_attr up_rate_limit_us = __ATTR_RW(up_rate_limit_us);
 static struct governor_attr down_rate_limit_us = __ATTR_RW(down_rate_limit_us);
-=======
 static ssize_t hispeed_load_show(struct gov_attr_set *attr_set, char *buf)
 {
 	struct sugov_tunables *tunables = to_sugov_tunables(attr_set);
@@ -706,17 +701,11 @@ static ssize_t iowait_boost_enable_store(struct gov_attr_set *attr_set,
 
 static struct governor_attr up_rate_limit_us = __ATTR_RW(up_rate_limit_us);
 static struct governor_attr down_rate_limit_us = __ATTR_RW(down_rate_limit_us);
-static struct governor_attr hispeed_load = __ATTR_RW(hispeed_load);
-static struct governor_attr hispeed_freq = __ATTR_RW(hispeed_freq);
-static struct governor_attr pl = __ATTR_RW(pl);
 static struct governor_attr iowait_boost_enable = __ATTR_RW(iowait_boost_enable);
 
 static struct attribute *sugov_attributes[] = {
 	&up_rate_limit_us.attr,
 	&down_rate_limit_us.attr,
-	&hispeed_load.attr,
-	&hispeed_freq.attr,
-	&pl.attr,
 	&iowait_boost_enable.attr,
 	NULL
 };
@@ -918,7 +907,7 @@ static int sugov_init(struct cpufreq_policy *policy)
 		tunables->down_rate_limit_us *= lat;
 	}
 
-	tunables->iowait_boost_enable = false;
+	tunables->iowait_boost_enable = 0;
 
 	policy->governor_data = sg_policy;
 	sg_policy->tunables = tunables;
