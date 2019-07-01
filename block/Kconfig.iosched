@@ -108,6 +108,10 @@ config IOSCHED_ANXIETY
 	  and batching synchronous requests, process initialization is
 	  expedited.
 
+config IOSCHED_DEPRESSION
+	tristate "DEPRESSION I/O scheduler"
+	default y
+
 choice
 	prompt "Default I/O scheduler"
 	default DEFAULT_MAPLE
@@ -149,11 +153,18 @@ config DEFAULT_SIO
 		  any workload. It also tries to guarantee low latency to
 		  interactive and soft real-time applications.
 
+	config DEFAULT_MAPLE
+		bool "Maple" if IOSCHED_MAPLE=y
+
+
+	config DEFAULT_DEPRESSION
+		bool "Depression" if IOSCHED_DEPRESSION=y
 endchoice
 
 config DEFAULT_IOSCHED
 	string
 	default "deadline" if DEFAULT_DEADLINE
+	default "depression" if DEFAULT_DEPRESSION
 	default "anxiety" if DEFAULT_ANXIETY
 	default "cfq" if DEFAULT_CFQ
 	default "zen" if DEFAULT_ZEN
