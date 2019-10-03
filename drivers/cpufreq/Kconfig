@@ -363,6 +363,7 @@ config CPU_FREQ_GOV_ENERGY_DCFC
 
 	  If in doubt, say N.
 
+<<<<<<< HEAD
 
 config CPU_FREQ_GOV_ALUCARDSCHED
 	bool "'alucardsched' cpufreq policy governor"
@@ -398,6 +399,8 @@ config CPU_FREQ_GOV_DARKNESSSCHED
 
 	  If in doubt, say N.
 
+=======
+>>>>>>> 78112d663b4c... sched: Add Energy DCFC Governor
 config CPU_INPUT_BOOST
 	bool "CPU Input Boost"
 	help
