@@ -388,6 +388,10 @@ static int setup_affinity(struct irq_desc *desc, struct cpumask *mask)
 	}
 
 	cpumask_and(mask, cpu_online_mask, set);
+
+	if (irqd_has_set(&desc->irq_data, IRQF_PERF_CRITICAL))
+		cpumask_copy(mask, cpu_perf_mask);
+
 	if (node != NUMA_NO_NODE) {
 		const struct cpumask *nodemask = cpumask_of_node(node);
 
