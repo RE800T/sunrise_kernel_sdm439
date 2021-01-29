@@ -10193,7 +10193,7 @@ static u64 cpu_uclamp_ls_read_u64(struct cgroup_subsys_state *css,
 	return (u64) tg->latency_sensitive;
 }
 
-static int cpu_uclamp_boost_write_u64(struct cgroup_subsys_state *css,
+int cpu_uclamp_boost_write_u64(struct cgroup_subsys_state *css,
 				   struct cftype *cftype, u64 boosted)
 {
 	struct task_group *tg;
@@ -10206,7 +10206,7 @@ static int cpu_uclamp_boost_write_u64(struct cgroup_subsys_state *css,
 	return 0;
 }
 
-static u64 cpu_uclamp_boost_read_u64(struct cgroup_subsys_state *css,
+u64 cpu_uclamp_boost_read_u64(struct cgroup_subsys_state *css,
 				  struct cftype *cft)
 {
 	struct task_group *tg = css_tg(css);
