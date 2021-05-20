@@ -304,17 +304,13 @@ config CPU_FREQ_GOV_SCHEDUTIL
 
 	  If in doubt, say N.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 8120b823ccfb... cpufreq: blu_schedutil: Introduce initial bringup
 config CPU_FREQ_GOV_BLU_SCHEDUTIL
 	tristate "'blu_schedutil' cpufreq policy governor"
 	depends on CPU_FREQ
 	select CPU_FREQ_GOV_ATTR_SET
 	select IRQ_WORK
 	help
+
 	  This governor makes decisions based on the utilization data provided
 	  by the scheduler.  It sets the CPU frequency to be proportional to
 	  the utilization/capacity ratio coming from the scheduler.  If the
@@ -329,7 +325,6 @@ config CPU_FREQ_GOV_BLU_SCHEDUTIL
 
 	  If in doubt, say N.
 
-<<<<<<< HEAD
 config CPU_FREQ_GOV_PIXUTIL
 	tristate "'pixutil' cpufreq policy governor"
 	depends on CPU_FREQ
@@ -349,7 +344,6 @@ config CPU_FREQ_GOV_PIXUTIL
 	  be called cpufreq_pixutil.
 
  	  If in doubt, say N.
-<<<<<<< HEAD
 
 config CPU_FREQ_GOV_ENERGY_DCFC
 	bool "'energy_dcfc' cpufreq policy governor"
@@ -368,7 +362,6 @@ config CPU_FREQ_GOV_ENERGY_DCFC
 
 	  If in doubt, say N.
 
-<<<<<<< HEAD
 
 config CPU_FREQ_GOV_ALUCARDSCHED
 	bool "'alucardsched' cpufreq policy governor"
@@ -403,14 +396,7 @@ config CPU_FREQ_GOV_DARKNESSSCHED
 	  both cases.
 
 	  If in doubt, say N.
-=======
->>>>>>> 42d3ba91af01... cpufreq: Import Google Pixel3 schedutil governor
 
-=======
->>>>>>> 78112d663b4c... sched: Add Energy DCFC Governor
-=======
-
->>>>>>> 8120b823ccfb... cpufreq: blu_schedutil: Introduce initial bringup
 config CPU_INPUT_BOOST
 	bool "CPU Input Boost"
 	help
@@ -480,10 +466,6 @@ config MAX_BOOST_FREQ_PERF
 	  Max-boost frequency for the performance CPU cluster.
 endif
 
-<<<<<<< HEAD
->>>>>>> 03ed6ce5dac4... cpufreq_darknesssched: Created a new sched governor.
-=======
->>>>>>> 8120b823ccfb... cpufreq: blu_schedutil: Introduce initial bringup
 comment "CPU frequency scaling drivers"
 
 config CPUFREQ_DT
