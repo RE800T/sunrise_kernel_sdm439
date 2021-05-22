@@ -383,7 +383,7 @@ static int __init cpu_input_boost_init(void)
 
 	b->msm_drm_notif.notifier_call = msm_drm_notifier_cb;
 	b->msm_drm_notif.priority = INT_MAX;
-	ret = msm_drm_register_client(&b->msm_drm_notif);
+//	ret = msm_drm_register_client(&b->msm_drm_notif);
 	if (ret) {
 		pr_err("Failed to register msm_drm notifier, err: %d\n", ret);
 		goto unregister_handler;
@@ -401,7 +401,7 @@ static int __init cpu_input_boost_init(void)
 	return 0;
 
 unregister_drm_notif:
-	msm_drm_unregister_client(&b->msm_drm_notif);
+//	msm_drm_unregister_client(&b->msm_drm_notif);
 unregister_handler:
 	input_unregister_handler(&cpu_input_boost_input_handler);
 unregister_cpu_notif:
