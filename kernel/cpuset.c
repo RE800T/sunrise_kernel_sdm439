@@ -1773,9 +1773,7 @@ static ssize_t cpuset_write_resmask(struct kernfs_open_file *of,
 	free_trial_cpuset(trialcs);
 
 #ifdef CONFIG_UCLAMP_ASSIST
-	// Uclamp Assist: Only overwrite if current task is booster.
-	if (task_is_booster(current))
-		uclamp_set(of, nbytes, off);
+	uclamp_set(of, nbytes, off);
 #endif
 out_unlock:
 	mutex_unlock(&cpuset_mutex);
@@ -1813,14 +1811,12 @@ static ssize_t cpuset_write_resmask_wrapper(struct kernfs_open_file *of,
 	if (task_is_booster(current)) {
 		for (i = 0; i < ARRAY_SIZE(cs_targets); i++) {
 			struct cs_target tgt = cs_targets[i];
-
 			if (!strcmp(cs->css.cgroup->kn->name, tgt.name))
 				return cpuset_write_resmask_assist(of, tgt,
 								   nbytes, off);
 		}
 	}
 #endif
-
 	buf = strstrip(buf);
 
 	return cpuset_write_resmask(of, buf, nbytes, off);
