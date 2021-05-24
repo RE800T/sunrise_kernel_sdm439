@@ -3489,7 +3489,7 @@ int usb_port_resume(struct usb_device *udev, pm_message_t msg)
 	if (status) {
 		dev_dbg(&port_dev->dev, "can't resume, status %d\n", status);
 	} else {
-		/* drive resume for USB_RESUME_TIMEOUT msec */
+Ã		/* drive resume for USB_RESUME_TIMEOUT msec */
 		dev_dbg(&udev->dev, "usb %sresume\n",
 				(PMSG_IS_AUTO(msg) ? "auto-" : ""));
 		if (!skip_extended_resume_delay)
@@ -3518,6 +3518,9 @@ int usb_port_resume(struct usb_device *udev, pm_message_t msg)
 				usb_clear_port_feature(hub->hdev, port1,
 						USB_PORT_FEAT_C_SUSPEND);
 		}
+
+		/* TRSMRCY = 10 msec */
+		msleep(10);
 	}
 
 	if (udev->persist_enabled)

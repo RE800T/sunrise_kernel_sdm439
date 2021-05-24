@@ -1216,6 +1216,8 @@ int __init __weak early_init_dt_reserve_memory_arch(phys_addr_t base,
 		return memblock_mark_nomap(base, size);
 #endif
 	}
+	if (nomap)
+		return memblock_remove(base, size);
 	return memblock_reserve(base, size);
 }
 
