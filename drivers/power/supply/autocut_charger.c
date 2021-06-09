@@ -24,13 +24,10 @@ static int error_disable_cnt;
 
 static struct delayed_work autocut_charger_work;
 
-<<<<<<< HEAD
 // Charging will stop if charge level equals or is higher than this parameter
 static unsigned int maximum_charge_percentage = 100;
 module_param_named(maximum_charge_percentage, maximum_charge_percentage, uint, 0644);
 
-=======
->>>>>>> f208a053360e... drivers: power: Introduce AutoCut Charger compability for k4.9
 static bool set_charging_control(struct power_supply *batt_psy, bool enable)
 {
 	union power_supply_propval val = {0, };
@@ -79,17 +76,10 @@ static void autocut_charger_worker(struct work_struct *work)
 		POWER_SUPPLY_PROP_PRESENT, &present);
 
 	if (present.intval) {
-<<<<<<< HEAD
 		if (charging_enabled.intval && bat_percent.intval >= maximum_charge_percentage) {
 			if (!set_charging_control(batt_psy, false))
 				return;
 		} else if (!charging_enabled.intval && bat_percent.intval < maximum_charge_percentage) {
-=======
-		if (charging_enabled.intval && bat_percent.intval >= 100) {
-			if (!set_charging_control(batt_psy, false))
-				return;
-		} else if (!charging_enabled.intval && bat_percent.intval < 100) {
->>>>>>> f208a053360e... drivers: power: Introduce AutoCut Charger compability for k4.9
 			if (!set_charging_control(batt_psy, true))
 				return;
 		}
@@ -125,7 +115,3 @@ static void __exit autocut_charger_exit(void)
 		cancel_delayed_work_sync(&autocut_charger_work);
 }
 module_exit(autocut_charger_exit);
-<<<<<<< HEAD
-=======
-
->>>>>>> f208a053360e... drivers: power: Introduce AutoCut Charger compability for k4.9
